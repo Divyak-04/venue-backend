@@ -1,3 +1,4 @@
+require('dotenv').config(); 
 const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
@@ -9,11 +10,14 @@ const app = express();
 app.use(bodyParser.json());
 app.use(cors());
 
+app.get("/", (req, res) => {
+  res.send("Venue backend is running!");
+});
+
 // MongoDB connection
 
 
-mongoose.connect('mongodb://localhost:27017/venue')
-.then(() => console.log('Connected to MongoDB (venue database)'))
+mongoose.connect(process.env.MONGO_URI).then(() => console.log('Connected to MongoDB (venue database)'))
 .catch((err) => console.error('Could not connect to MongoDB', err));
 
 
