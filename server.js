@@ -2,7 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const cors = require("cors");
-
+require("dotenv").config();
 const app = express();
 
 // Middleware
@@ -10,7 +10,7 @@ app.use(bodyParser.json());
 app.use(cors());
 
 // MongoDB connection
-mongoose.connect('mongodb://localhost:27017/venue',{ 
+mongoose.connect(process.env.MONGO_URI,{ 
   useNewUrlParser: true, 
   useUnifiedTopology: true,
   serverSelectionTimeoutMS: 30000 // Extend timeout to 30 seconds
